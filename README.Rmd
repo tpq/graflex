@@ -25,7 +25,8 @@ devtools::install_github("tpq/graflex")
 
 ```{r}
 library(graflex)
-A <- randGraph(10) # a graph of interest
-K <- randK(10, 3) # a database related nodes (rows) to concepts (cols)
+set.seed(1)
+A <- randGraph(100) # a graph of interest
+K <- randK(100, 3) # a database relating nodes (rows) to concepts (cols)
 graflex(A, K) # permute FDR for overlap
 ```

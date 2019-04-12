@@ -14,14 +14,15 @@ devtools::install_github("tpq/graflex")
 
 ``` r
 library(graflex)
-A <- randGraph(10) # a graph of interest
-K <- randK(10, 3) # a database related nodes (rows) to concepts (cols)
+set.seed(1)
+A <- randGraph(100) # a graph of interest
+K <- randK(100, 3) # a database relating nodes (rows) to concepts (cols)
 graflex(A, K) # permute FDR for overlap
 #> |------------(25%)----------(50%)----------(75%)----------|
-#>   Neither G.only A.only Both      Odds      LogOR FDR.under FDR.over
-#> 1      15      5     20    5 0.7500000 -0.2876821     0.456    0.790
-#> 2      15      5     20    5 0.7500000 -0.2876821     0.468    0.778
-#> 3      14      6     21    4 0.4444444 -0.8109302     0.260    0.886
+#>   Neither G.only A.only Both      Odds       LogOR FDR.under FDR.over
+#> 1    1887    611   1838  614 1.0317003  0.03120821     0.664    0.354
+#> 2    1870    628   1855  597 0.9583240 -0.04256932     0.260    0.762
+#> 3    1864    634   1861  591 0.9336794 -0.06862220     0.166    0.844
 #>   Permutes
 #> 1      500
 #> 2      500
