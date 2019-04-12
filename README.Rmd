@@ -1,0 +1,31 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+## Quick start
+
+Welcome to the `graflex` GitHub page!
+
+The Fisher's Exact Test is often used to measure the significance of overlap between two categorical variables. However, the test operates on the assumption that the relationship between observations is independent. Depending on how a graph is made, this assumption may not hold, thus making the Fisher's Exact Test invalid. This package offers a fast way to permute a false discovery rate (FDR) for the edge overlap between two non-random graphs, using the odds ratio (OR) as the test statistic.
+
+```{r, eval = FALSE}
+library(devtools)
+devtools::install_github("tpq/graflex")
+```
+
+```{r}
+library(graflex)
+A <- randGraph(10) # a graph of interest
+K <- randK(10, 3) # a database related nodes (rows) to concepts (cols)
+graflex(A, K) # permute FDR for overlap
+```

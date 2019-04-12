@@ -1,0 +1,66 @@
+---
+title: "Edge Overlap Enrichment Between Non-Random Graphs"
+author: "Thomas Quinn"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Motivation
+
+This package calculates whether the edges of two graphs overlap beyond chance. Let us consider the first graph, A, where some nodes associate with a concept. We define a "concept graph", G, as a graph whose edges indicate that those two nodes associate with the same concept. As such, G is a fully connected sub-graph of A.
+
+```{r}
+library(graflex)
+set.seed(1)
+A <- randGraph(40)
+G <- randConcept(40)
+```
+
+If the edges in A and G are truly independent, we can calculate an exact p-value for the overlap between A and G using Fisher's Exact Test. Note that because A and G are symmetric, we only need the lower-left half of the adjacency matrix.
+
+```{r}
+Allt <- A[lower.tri(A)]
+Gllt <- G[lower.tri(G)]
+tab <- table(Allt, Gllt)
+tab
+fisher.test(tab)
+```
+
+Importantly, a graph built from a random process is not necessarily a random graph. When edges are not independent, the Fisher's Exact Test is invalid, and the false discovery rate will exceed $\alpha$. We have found that this case applies to our `propr::propd()` graphs. Below, we build differential proportionality graphs from random Poisson data. Although the underlying data are random, the resultant graph is not! This results in a false discovery.
+
+```{r}
+set.seed(1)
+A <- randPropd(100)
+G <- randConcept(100)
+Allt <- A[lower.tri(A)]
+Gllt <- G[lower.tri(G)]
+tab <- table(Allt, Gllt)
+tab
+fisher.test(tab)
+```
+
+Although we cannot calculate an exact p-value in this case, we can still calculate an odds ratio. Similarly, we can permute an odds ratio over randomized instances of A. With these two pieces of information, we can estimate a false discovery rate for the actual odds ratio.
+
+```{r}
+actualOR <- calculateOR(A, G)
+permutedOR <- permuteOR(A, G, p = 50) # p = 50 for run-time reasons only
+getFDR(actualOR, permutedOR)
+```
+
+The `graflex` function wraps `calculateOR`, `permuteOR`, and `getFDR` over a series of concepts (as described by a knowledge database, K, where each row is a graph node and each column is a concept).
+
+```{r}
+K <- randK(100, 5)
+graflex(A, K, p = 50) # p = 50 for run-time reasons only
+```
