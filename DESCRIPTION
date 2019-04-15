@@ -1,6 +1,6 @@
 Package: graflex
 Title: Edge Overlap Enrichment Between Non-Random Graphs
-Version: 0.0.1
+Version: 0.0.2
 URL: http://github.com/tpq/graflex
 BugReports: http://github.com/tpq/graflex/issues
 Authors@R: c(
@@ -27,4 +27,5 @@ Suggests:
     knitr,
     org.Hs.eg.db,
     propr,
-    rmarkdown
+    rmarkdown,
+    testthat

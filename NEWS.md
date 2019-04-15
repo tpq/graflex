@@ -1,3 +1,7 @@
+## graflex 0.0.2
+---------------------
+* Add tests for `binTab` and `getFDR` functions
+
 ## graflex 0.0.1
 ---------------------
 * New backend functions
