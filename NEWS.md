@@ -1,3 +1,7 @@
+## graflex 0.0.3
+---------------------
+* Fix bug where `getK` triggers an error
+
 ## graflex 0.0.2
 ---------------------
 * Add tests for `binTab` and `getFDR` functions

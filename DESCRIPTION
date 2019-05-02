@@ -1,6 +1,6 @@
 Package: graflex
 Title: Edge Overlap Enrichment Between Non-Random Graphs
-Version: 0.0.2
+Version: 0.0.3
 URL: http://github.com/tpq/graflex
 BugReports: http://github.com/tpq/graflex/issues
 Authors@R: c(
@@ -15,7 +15,7 @@ Description: The Fisher's Exact Test is often used to measure the significance o
 License: GPL-2
 LazyData: true
 VignetteBuilder: knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Encoding: UTF-8
 Depends:
     R (>= 3.2.2)

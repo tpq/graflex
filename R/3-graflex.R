@@ -34,7 +34,7 @@ getK <- function(keys, columns = "GO", keytype = "ENSEMBL", minK = 10){
 
   # Sort and filter K database
   gotab <- gotab[keys, ]
-  if(!identical(rownames(gotab), colnames(keys))){
+  if(!identical(rownames(gotab), keys)){
     stop("Uh oh! Unexpected mapping.")
   }
   gotab[,colSums(gotab) >= minK]
